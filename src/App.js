@@ -18,11 +18,12 @@ class App extends React.Component {
   unsubscribeFromAuth = null;
 
   componentDidMount(){
-    const { setCurrentUser } = this.props;
+    const { setCurrentUser} = this.props;
 
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth =>{
-      console.log('User Data:');
+      console.log(`User Data: ${userAuth}`);
       if(userAuth){
+        console.log(`Inside : ${userAuth}`);
         const userRef = await createUserProfileDocument(userAuth);
         
         userRef.onSnapshot(snapshot => {
@@ -38,6 +39,7 @@ class App extends React.Component {
         console.log(this.state);
       }  
       else{
+        console.log(`Outside : ${userAuth}`);
         setCurrentUser(userAuth);
       }
 
